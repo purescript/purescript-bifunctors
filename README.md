@@ -91,3 +91,24 @@
     lmap :: forall f a b c. (Bifunctor f) => (a -> b) -> f a c -> f b c
 
     rmap :: forall f a b c. (Bifunctor f) => (b -> c) -> f a b -> f a c
+
+
+## Module Data.Bitraversable
+
+### Type Classes
+
+    class (Bifunctor t, Bifoldable t) <= Bitraversable t where
+      bitraverse :: forall f a b c d. (Applicative f) => (a -> f c) -> (b -> f d) -> t a b -> f (t c d)
+      bisequence :: forall f a b. (Applicative f) => t (f a) (f b) -> f (t a b)
+
+
+### Type Class Instances
+
+    instance bitraversableEither :: Bitraversable Either
+
+    instance bitraversableTuple :: Bitraversable Tuple
+
+
+### Values
+
+    bifor :: forall t f a b c d. (Bitraversable t, Applicative f) => t a b -> (a -> f c) -> (b -> f d) -> f (t c d)
