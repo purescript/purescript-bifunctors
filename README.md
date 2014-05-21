@@ -39,6 +39,38 @@
     bilift3 :: forall w a b c d e f g h. (Biapply w) => (a -> b -> c -> d) -> (e -> f -> g -> h) -> w a e -> w b f -> w c g -> w d h
 
 
+## Module Data.Bifoldable
+
+### Type Classes
+
+    class Bifoldable p where
+      bifoldr :: forall a b c. (a -> c -> c) -> (b -> c -> c) -> c -> p a b -> c
+      bifoldl :: forall a b c. (c -> a -> c) -> (c -> b -> c) -> c -> p a b -> c
+      bifoldMap :: forall m a b. (Monoid m) => (a -> m) -> (b -> m) -> p a b -> m
+
+
+### Type Class Instances
+
+    instance bifoldableEither :: Bifoldable Either
+
+    instance bifoldableTuple :: Bifoldable Tuple
+
+
+### Values
+
+    biall :: forall t a b. (Bifoldable t) => (a -> Prim.Boolean) -> (b -> Prim.Boolean) -> t a b -> Prim.Boolean
+
+    biany :: forall t a b. (Bifoldable t) => (a -> Prim.Boolean) -> (b -> Prim.Boolean) -> t a b -> Prim.Boolean
+
+    bifold :: forall t m. (Bifoldable t, Monoid m) => t m m -> m
+
+    bifor_ :: forall t f a b c d. (Bifoldable t, Applicative f) => t a b -> (a -> f c) -> (b -> f d) -> f Unit
+
+    bisequence_ :: forall t f a b. (Bifoldable t, Applicative f) => t (f a) (f b) -> f Unit
+
+    bitraverse_ :: forall t f a b c d. (Bifoldable t, Applicative f) => (a -> f c) -> (b -> f d) -> t a b -> f Unit
+
+
 ## Module Data.Bifunctor
 
 ### Type Classes
