@@ -3,7 +3,6 @@
   "keywords": [
     "purescript"
   ],
-  "private": true,
   "license": "MIT",
   "ignore": [
     "**/.*",
