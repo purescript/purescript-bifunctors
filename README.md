@@ -93,7 +93,7 @@
     rmap :: forall f a b c. (Bifunctor f) => (b -> c) -> f a b -> f a c
 
 
-## Module Data.Bifuntor.Clown
+## Module Data.Bifunctor.Clown
 
 ### Types
 
