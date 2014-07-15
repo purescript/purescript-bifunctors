@@ -93,7 +93,7 @@
     rmap :: forall f a b c. (Bifunctor f) => (b -> c) -> f a b -> f a c
 
 
-## Module Data.Bifuntor.Clown
+## Module Data.Bifunctor.Clown
 
 ### Types
 
@@ -236,7 +236,7 @@
     instance productBitraversable :: (Bitraversable f, Bitraversable g) => Bitraversable (Product f g)
 
 
-## Module Data.Bifunctor.Wrapped
+## Module Data.Bifunctor.Wrap
 
 ### Types
 

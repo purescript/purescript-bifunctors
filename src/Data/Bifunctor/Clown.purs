@@ -1,4 +1,4 @@
-module Data.Bifuntor.Clown where
+module Data.Bifunctor.Clown where
 
 import Data.Bifoldable
 import Data.Bifunctor
