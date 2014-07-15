@@ -58,9 +58,9 @@
 
 ### Values
 
-    biall :: forall t a b. (Bifoldable t) => (a -> Prim.Boolean) -> (b -> Prim.Boolean) -> t a b -> Prim.Boolean
+    biall :: forall t a b. (Bifoldable t) => (a -> Boolean) -> (b -> Boolean) -> t a b -> Boolean
 
-    biany :: forall t a b. (Bifoldable t) => (a -> Prim.Boolean) -> (b -> Prim.Boolean) -> t a b -> Prim.Boolean
+    biany :: forall t a b. (Bifoldable t) => (a -> Boolean) -> (b -> Boolean) -> t a b -> Boolean
 
     bifold :: forall t m. (Bifoldable t, Monoid m) => t m m -> m
 
@@ -91,6 +91,181 @@
     lmap :: forall f a b c. (Bifunctor f) => (a -> b) -> f a c -> f b c
 
     rmap :: forall f a b c. (Bifunctor f) => (b -> c) -> f a b -> f a c
+
+
+## Module Data.Bifuntor.Clown
+
+### Types
+
+    data Clown f a b where
+      Clown :: f a -> Clown f a b
+
+
+### Type Class Instances
+
+    instance clownBiapplicative :: (Applicative f) => Biapplicative (Clown f)
+
+    instance clownBiapply :: (Apply f) => Biapply (Clown f)
+
+    instance clownBifoldable :: (Foldable f) => Bifoldable (Clown f)
+
+    instance clownBifunctor :: (Functor f) => Bifunctor (Clown f)
+
+    instance clownBitraversable :: (Traversable f) => Bitraversable (Clown f)
+
+    instance clownFoldable :: Foldable (Clown f a)
+
+    instance clownFunctor :: Functor (Clown f a)
+
+    instance clownTraversable :: Traversable (Clown f a)
+
+
+### Values
+
+    runClown :: forall f a b. Clown f a b -> f a
+
+
+## Module Data.Bifunctor.Flip
+
+### Types
+
+    data Flip p a b where
+      Flip :: p b a -> Flip p a b
+
+
+### Type Class Instances
+
+    instance flipBiapplicative :: (Biapplicative p) => Biapplicative (Flip p)
+
+    instance flipBiapply :: (Biapply p) => Biapply (Flip p)
+
+    instance flipBifoldable :: (Bifoldable p) => Bifoldable (Flip p)
+
+    instance flipBifunctor :: (Bifunctor p) => Bifunctor (Flip p)
+
+    instance flipBitraversable :: (Bitraversable p) => Bitraversable (Flip p)
+
+    instance flipFoldable :: (Bifoldable p) => Foldable (Flip p a)
+
+    instance flipFunctor :: (Bifunctor p) => Functor (Flip p a)
+
+    instance flipTraversable :: (Bitraversable p) => Traversable (Flip p a)
+
+
+### Values
+
+    runFlip :: forall p a b. Flip p a b -> p b a
+
+
+## Module Data.Bifunctor.Join
+
+### Types
+
+    data Join p a where
+      Join :: p a a -> Join p a
+
+
+### Type Class Instances
+
+    instance joinApplicative :: (Biapplicative p) => Applicative (Join p)
+
+    instance joinApply :: (Biapply p) => Apply (Join p)
+
+    instance joinFoldable :: (Bifoldable p) => Foldable (Join p)
+
+    instance joinFunctor :: (Bifunctor p) => Functor (Join p)
+
+    instance joinTraversable :: (Bitraversable p) => Traversable (Join p)
+
+
+### Values
+
+    runJoin :: forall p a. Join p a -> p a a
+
+
+## Module Data.Bifunctor.Joker
+
+### Types
+
+    data Joker g a b where
+      Joker :: g b -> Joker g a b
+
+
+### Type Class Instances
+
+    instance jokerBiapplicative :: (Applicative g) => Biapplicative (Joker g)
+
+    instance jokerBiapply :: (Apply g) => Biapply (Joker g)
+
+    instance jokerBifoldable :: (Foldable g) => Bifoldable (Joker g)
+
+    instance jokerBifunctor :: (Functor g) => Bifunctor (Joker g)
+
+    instance jokerBitraversable :: (Traversable g) => Bitraversable (Joker g)
+
+    instance jokerFoldable :: (Foldable g) => Foldable (Joker g a)
+
+    instance jokerFunctor :: (Functor g) => Functor (Joker g a)
+
+    instance jokerTraversable :: (Traversable g) => Traversable (Joker g a)
+
+
+### Values
+
+    runJoker :: forall g a b. Joker g a b -> g b
+
+
+## Module Data.Bifunctor.Product
+
+### Types
+
+    data Product f g a b where
+      Pair :: f a b -> g a b -> Product f g a b
+
+
+### Type Class Instances
+
+    instance productBiapplicative :: (Biapplicative f, Biapplicative g) => Biapplicative (Product f g)
+
+    instance productBiapply :: (Biapply f, Biapply g) => Biapply (Product f g)
+
+    instance productBifoldable :: (Bifoldable f, Bifoldable g) => Bifoldable (Product f g)
+
+    instance productBifunctor :: (Bifunctor f, Bifunctor g) => Bifunctor (Product f g)
+
+    instance productBitraversable :: (Bitraversable f, Bitraversable g) => Bitraversable (Product f g)
+
+
+## Module Data.Bifunctor.Wrapped
+
+### Types
+
+    data Wrap p a b where
+      Wrap :: p a b -> Wrap p a b
+
+
+### Type Class Instances
+
+    instance wrapBiapplicative :: (Biapplicative p) => Biapplicative (Wrap p)
+
+    instance wrapBiapply :: (Biapply p) => Biapply (Wrap p)
+
+    instance wrapBifoldable :: (Bifoldable p) => Bifoldable (Wrap p)
+
+    instance wrapBifunctor :: (Bifunctor p) => Bifunctor (Wrap p)
+
+    instance wrapBitraversable :: (Bitraversable p) => Bitraversable (Wrap p)
+
+    instance wrapFoldable :: (Bifoldable p) => Foldable (Wrap p a)
+
+    instance wrapFunctor :: (Bifunctor p) => Functor (Wrap p a)
+
+    instance wrapTraversable :: (Bitraversable p) => Traversable (Wrap p a)
+
+
+### Values
+
+    unwrap :: forall p a b. Wrap p a b -> p a b
 
 
 ## Module Data.Bitraversable
