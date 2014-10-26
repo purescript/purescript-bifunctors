@@ -1,6 +1,8 @@
 module Control.Biapplicative where
 
+import Data.Const
 import Data.Tuple
+
 import Control.Biapply
 
 class (Biapply w) <= Biapplicative w where
@@ -8,3 +10,6 @@ class (Biapply w) <= Biapplicative w where
 
 instance biapplicativeTuple :: Biapplicative Tuple where
   bipure = Tuple
+
+instance biapplicativeConst :: Biapplicative Const where
+  bipure a _ = Const a

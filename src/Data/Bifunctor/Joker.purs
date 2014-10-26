@@ -4,12 +4,12 @@ import Data.Bifoldable
 import Data.Bifunctor
 import Data.Bitraversable
 import Data.Foldable
-import Data.Traversable
 import Data.Monoid
+import Data.Traversable
+
 import Control.Apply
-import Control.Biapply
--- Applicative is in Prelude
 import Control.Biapplicative
+import Control.Biapply
 
 data Joker g a b = Joker (g b)
 
@@ -17,7 +17,7 @@ runJoker :: forall g a b. Joker g a b -> g b
 runJoker (Joker gb) = gb
 
 instance jokerBifunctor :: (Functor g) => Bifunctor (Joker g) where
-  bimap _ g = Joker <<< ((<$>) g) <<< runJoker 
+  bimap _ g = Joker <<< ((<$>) g) <<< runJoker
 
 instance jokerFunctor :: (Functor g) => Functor (Joker g a) where
   (<$>) g = Joker <<< ((<$>) g) <<< runJoker

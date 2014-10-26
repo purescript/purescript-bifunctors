@@ -1,22 +1,24 @@
 module Data.Bifoldable where
 
-import Control.Apply
-import Control.Bind
+import Data.Const
 import Data.Either
 import Data.Monoid
-import Data.Monoid.Any
 import Data.Monoid.All
+import Data.Monoid.Any
 import Data.Tuple
+
+import Control.Apply
+import Control.Bind
 
 class Bifoldable p where
   bifoldr :: forall a b c. (a -> c -> c) -> (b -> c -> c) -> c -> p a b -> c
   bifoldl :: forall a b c. (c -> a -> c) -> (c -> b -> c) -> c -> p a b -> c
   bifoldMap :: forall m a b. (Monoid m) => (a -> m) -> (b -> m) -> p a b -> m
-  
+
 instance bifoldableTuple :: Bifoldable Tuple where
   bifoldMap f g (Tuple a b) = f a <> g b
   bifoldr f g z (Tuple a b) = f a (g b z)
-  bifoldl f g z (Tuple a b) = g (f z a) b 
+  bifoldl f g z (Tuple a b) = g (f z a) b
 
 instance bifoldableEither :: Bifoldable Either where
   bifoldMap f _ (Left a) = f a
@@ -25,9 +27,14 @@ instance bifoldableEither :: Bifoldable Either where
   bifoldr _ g z (Right b) = g b z
   bifoldl f _ z (Left a) = f z a
   bifoldl _ g z (Right b) = g z b
-  
+
+instance bifoldableConst :: Bifoldable Const where
+  bifoldMap f _ (Const a) = f a
+  bifoldr f _ z (Const a) = f a z
+  bifoldl f _ z (Const a) = f z a
+
 bifold :: forall t m. (Bifoldable t, Monoid m) => t m m -> m
-bifold = bifoldMap id id  
+bifold = bifoldMap id id
 
 bitraverse_ :: forall t f a b c d. (Bifoldable t, Applicative f) => (a -> f c) -> (b -> f d) -> t a b -> f Unit
 bitraverse_ f g = bifoldr ((*>) <<< f) ((*>) <<< g) (pure unit)

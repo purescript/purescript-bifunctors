@@ -10,6 +10,8 @@
 
 ### Type Class Instances
 
+    instance biapplicativeConst :: Biapplicative Const
+
     instance biapplicativeTuple :: Biapplicative Tuple
 
 
@@ -22,6 +24,8 @@
 
 
 ### Type Class Instances
+
+    instance biapplyConst :: Biapply Const
 
     instance biapplyTuple :: Biapply Tuple
 
@@ -50,6 +54,8 @@
 
 
 ### Type Class Instances
+
+    instance bifoldableConst :: Bifoldable Const
 
     instance bifoldableEither :: Bifoldable Either
 
@@ -80,6 +86,8 @@
 
 
 ### Type Class Instances
+
+    instance bifunctorConst :: Bifunctor Const
 
     instance bifunctorEither :: Bifunctor Either
 
@@ -278,6 +286,8 @@
 
 
 ### Type Class Instances
+
+    instance bitraversableConst :: Bitraversable Const
 
     instance bitraversableEither :: Bitraversable Either
 

@@ -1,5 +1,6 @@
 module Data.Bifunctor where
 
+import Data.Const
 import Data.Either
 import Data.Tuple
 
@@ -15,6 +16,9 @@ rmap = bimap id
 instance bifunctorEither :: Bifunctor Either where
   bimap f _ (Left l) = Left (f l)
   bimap _ g (Right r) = Right (g r)
-  
+
 instance bifunctorTuple :: Bifunctor Tuple where
   bimap f g (Tuple x y) = Tuple (f x) (g y)
+
+instance bifunctorConst :: Bifunctor Const where
+  bimap f _ (Const a) = Const (f a)

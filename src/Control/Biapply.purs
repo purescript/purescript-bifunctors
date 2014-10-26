@@ -1,8 +1,10 @@
 module Control.Biapply where
 
-import Control.Apply
 import Data.Bifunctor
+import Data.Const
 import Data.Tuple
+
+import Control.Apply
 
 infixl 4 <<$>>
 infixl 4 <<*>>
@@ -29,3 +31,6 @@ bilift3 f g a b c = bimap f g <<$>> a <<*>> b <<*>> c
 
 instance biapplyTuple :: Biapply Tuple where
   (<<*>>) (Tuple f g) (Tuple a b) = Tuple (f a) (g b)
+
+instance biapplyConst :: Biapply Const where
+  (<<*>>) (Const f) (Const x) = Const (f x)

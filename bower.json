@@ -1,7 +1,16 @@
 {
   "name": "purescript-bifunctors",
   "keywords": [
-    "purescript"
+    "purescript",
+    "bifunctor",
+    "bifoldable",
+    "bitraversable",
+    "biapply",
+    "biapplicative",
+  ],
+  "authors": [
+    "Gary Burgess <gary.burgess@gmail.com>",
+    "Dylan Lukes <lukes.dylan@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [
@@ -20,6 +29,7 @@
     "purescript-either": "~0.1.2",
     "purescript-control": "~0.2.0",
     "purescript-foldable-traversable": "~0.1.3",
-    "purescript-monoid": "~0.1.2"
+    "purescript-monoid": "~0.1.2",
+    "purescript-const": "~0.1.0"
   }
 }

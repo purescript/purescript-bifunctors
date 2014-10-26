@@ -4,12 +4,12 @@ import Data.Bifoldable
 import Data.Bifunctor
 import Data.Bitraversable
 import Data.Foldable
-import Data.Traversable
 import Data.Monoid
+import Data.Traversable
+
 import Control.Apply
-import Control.Biapply
--- Applicative is in Prelude
 import Control.Biapplicative
+import Control.Biapply
 
 data Join p a = Join (p a a)
 

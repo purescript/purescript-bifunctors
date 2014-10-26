@@ -4,14 +4,14 @@ import Data.Bifoldable
 import Data.Bifunctor
 import Data.Bitraversable
 import Data.Foldable
-import Data.Traversable
 import Data.Monoid
 import Data.Monoid.Dual
 import Data.Monoid.Endo
+import Data.Traversable
+
 import Control.Apply
-import Control.Biapply
--- Applicative is in Prelude
 import Control.Biapplicative
+import Control.Biapply
 
 data Product f g a b = Pair (f a b) (g a b)
 
