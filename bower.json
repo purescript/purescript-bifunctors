@@ -6,7 +6,7 @@
     "bifoldable",
     "bitraversable",
     "biapply",
-    "biapplicative",
+    "biapplicative"
   ],
   "authors": [
     "Gary Burgess <gary.burgess@gmail.com>",
