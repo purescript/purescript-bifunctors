@@ -1,7 +1,8 @@
 module Data.Bitraversable where
 
-import Data.Bifunctor
 import Data.Bifoldable
+import Data.Bifunctor
+import Data.Const
 import Data.Either
 import Data.Tuple
 
@@ -18,6 +19,10 @@ instance bitraversableEither :: Bitraversable Either where
   bitraverse _ g (Right b) = Right <$> g b
   bisequence (Left a) = Left <$> a
   bisequence (Right b) = Right <$> b
-  
+
+instance bitraversableConst :: Bitraversable Const where
+  bitraverse f _ (Const a) = Const <$> f a
+  bisequence (Const a) = Const <$> a
+
 bifor :: forall t f a b c d. (Bitraversable t, Applicative f) => t a b -> (a -> f c) -> (b -> f d) -> f (t c d)
 bifor t f g = bitraverse f g t

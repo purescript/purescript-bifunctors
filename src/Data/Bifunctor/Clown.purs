@@ -4,20 +4,20 @@ import Data.Bifoldable
 import Data.Bifunctor
 import Data.Bitraversable
 import Data.Foldable
-import Data.Traversable
 import Data.Monoid
+import Data.Traversable
+
 import Control.Apply
-import Control.Biapply
--- Applicative is in Prelude
 import Control.Biapplicative
+import Control.Biapply
 
 data Clown f a b = Clown (f a)
 
 runClown :: forall f a b. Clown f a b -> f a
-runClown (Clown fa) = fa 
+runClown (Clown fa) = fa
 
 instance clownBifunctor :: (Functor f) => Bifunctor (Clown f) where
-  bimap f _ = Clown <<< ((<$>) f) <<< runClown 
+  bimap f _ = Clown <<< ((<$>) f) <<< runClown
 
 instance clownFunctor :: Functor (Clown f a) where
   (<$>) _ = Clown <<< runClown

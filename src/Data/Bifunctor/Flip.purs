@@ -4,17 +4,17 @@ import Data.Bifoldable
 import Data.Bifunctor
 import Data.Bitraversable
 import Data.Foldable
-import Data.Traversable
 import Data.Monoid
+import Data.Traversable
+
 import Control.Apply
-import Control.Biapply
--- Applicative is in Prelude
 import Control.Biapplicative
+import Control.Biapply
 
 data Flip p a b = Flip (p b a)
 
 runFlip :: forall p a b. Flip p a b -> p b a
-runFlip (Flip pba) = pba 
+runFlip (Flip pba) = pba
 
 instance flipBifunctor :: (Bifunctor p) => Bifunctor (Flip p) where
   bimap f g = Flip <<< (bimap g f) <<< runFlip

@@ -4,17 +4,17 @@ import Data.Bifoldable
 import Data.Bifunctor
 import Data.Bitraversable
 import Data.Foldable
-import Data.Traversable
 import Data.Monoid
+import Data.Traversable
+
 import Control.Apply
-import Control.Biapply
--- Applicative is in Prelude
 import Control.Biapplicative
+import Control.Biapply
 
 data Wrap p a b = Wrap (p a b)
 
 unwrap :: forall p a b. Wrap p a b -> p a b
-unwrap (Wrap pab) = pab 
+unwrap (Wrap pab) = pab
 
 instance wrapBifunctor :: (Bifunctor p) => Bifunctor (Wrap p) where
   bimap f g = Wrap <<< (bimap f g) <<< unwrap
