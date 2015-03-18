@@ -13,6 +13,7 @@ import Control.Apply
 import Control.Biapplicative
 import Control.Biapply
 
+-- | The product of two `Bifunctor`s.
 data Product f g a b = Pair (f a b) (g a b)
 
 instance productBifunctor :: (Bifunctor f, Bifunctor g) => Bifunctor (Product f g) where

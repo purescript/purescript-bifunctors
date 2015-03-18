@@ -11,8 +11,11 @@ import Control.Apply
 import Control.Biapplicative
 import Control.Biapply
 
+-- | Flips the order of the type arguments of a `Bifunctor`, creating a
+-- | `Functor` instance for the first type argument.
 data Flip p a b = Flip (p b a)
 
+-- | Remove the `Flip` constructor.
 runFlip :: forall p a b. Flip p a b -> p b a
 runFlip (Flip pba) = pba
 
