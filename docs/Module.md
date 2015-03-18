@@ -9,6 +9,8 @@ class (Biapply w) <= Biapplicative w where
   bipure :: forall a b. a -> b -> w a b
 ```
 
+`Biapplicative` captures type constructors of two arguments which support lifting of
+functions of zero or more arguments, in the sense of `Applicative`.
 
 #### `biapplicativeTuple`
 
@@ -33,6 +35,12 @@ instance biapplicativeConst :: Biapplicative Const
 (<<$>>) :: forall a b. (a -> b) -> a -> b
 ```
 
+A convenience function which can be used to apply the result of `bipure` in
+the style of `Applicative`:
+
+```purescript
+bipure f g <<$>> x <<*>> y
+```
 
 #### `Biapply`
 
@@ -41,6 +49,8 @@ class (Bifunctor w) <= Biapply w where
   (<<*>>) :: forall a b c d. w (a -> b) (c -> d) -> w a c -> w b d
 ```
 
+`Biapply` captures type constructors of two arguments which support lifting of
+functions of one or more arguments, in the sense of `Apply`.
 
 #### `(*>>)`
 
@@ -48,6 +58,7 @@ class (Bifunctor w) <= Biapply w where
 (*>>) :: forall w a b c d. (Biapply w) => w a b -> w c d -> w c d
 ```
 
+Keep the results of the second computation
 
 #### `(<<*)`
 
@@ -55,6 +66,7 @@ class (Bifunctor w) <= Biapply w where
 (<<*) :: forall w a b c d. (Biapply w) => w a b -> w c d -> w a b
 ```
 
+Keep the results of the first computation
 
 #### `bilift2`
 
@@ -62,6 +74,7 @@ class (Bifunctor w) <= Biapply w where
 bilift2 :: forall w a b c d e f. (Biapply w) => (a -> b -> c) -> (d -> e -> f) -> w a d -> w b e -> w c f
 ```
 
+Lift a function of two arguments.
 
 #### `bilift3`
 
@@ -69,6 +82,7 @@ bilift2 :: forall w a b c d e f. (Biapply w) => (a -> b -> c) -> (d -> e -> f) -
 bilift3 :: forall w a b c d e f g h. (Biapply w) => (a -> b -> c -> d) -> (e -> f -> g -> h) -> w a e -> w b f -> w c g -> w d h
 ```
 
+Lift a function of three arguments.
 
 #### `biapplyTuple`
 
@@ -95,6 +109,13 @@ class Bifoldable p where
   bifoldl :: forall a b c. (c -> a -> c) -> (c -> b -> c) -> c -> p a b -> c
   bifoldMap :: forall m a b. (Monoid m) => (a -> m) -> (b -> m) -> p a b -> m
 ```
+
+`Bifoldable` represents data structures with two type arguments which can be 
+folded.
+
+A fold for such a structure requires two step functions, one for each type 
+argument. Type class instances should choose the appropriate step function based
+on the type of the element encountered at each point of the fold.
 
 
 #### `bifoldableTuple`
@@ -124,6 +145,7 @@ instance bifoldableConst :: Bifoldable Const
 bifold :: forall t m. (Bifoldable t, Monoid m) => t m m -> m
 ```
 
+Fold a data structure, accumulating values in a monoidal type.
 
 #### `bitraverse_`
 
@@ -131,6 +153,8 @@ bifold :: forall t m. (Bifoldable t, Monoid m) => t m m -> m
 bitraverse_ :: forall t f a b c d. (Bifoldable t, Applicative f) => (a -> f c) -> (b -> f d) -> t a b -> f Unit
 ```
 
+Traverse a data structure, accumulating effects using an `Applicative` functor,
+ignoring the final result.
 
 #### `bifor_`
 
@@ -138,6 +162,7 @@ bitraverse_ :: forall t f a b c d. (Bifoldable t, Applicative f) => (a -> f c) -
 bifor_ :: forall t f a b c d. (Bifoldable t, Applicative f) => t a b -> (a -> f c) -> (b -> f d) -> f Unit
 ```
 
+A version of `bitraverse_` with the data structure as the first argument.
 
 #### `bisequence_`
 
@@ -145,6 +170,8 @@ bifor_ :: forall t f a b c d. (Bifoldable t, Applicative f) => t a b -> (a -> f 
 bisequence_ :: forall t f a b. (Bifoldable t, Applicative f) => t (f a) (f b) -> f Unit
 ```
 
+Collapse a data structure, collecting effects using an `Applicative` functor,
+ignoring the final result.
 
 #### `biany`
 
@@ -152,6 +179,7 @@ bisequence_ :: forall t f a b. (Bifoldable t, Applicative f) => t (f a) (f b) ->
 biany :: forall t a b. (Bifoldable t) => (a -> Boolean) -> (b -> Boolean) -> t a b -> Boolean
 ```
 
+Test whether a predicate holds at any position in a data structure.
 
 #### `biall`
 
@@ -159,6 +187,7 @@ biany :: forall t a b. (Bifoldable t) => (a -> Boolean) -> (b -> Boolean) -> t a
 biall :: forall t a b. (Bifoldable t) => (a -> Boolean) -> (b -> Boolean) -> t a b -> Boolean
 ```
 
+Test whether a predicate holds at all positions in a data structure.
 
 
 ## Module Data.Bifunctor
@@ -170,6 +199,19 @@ class Bifunctor f where
   bimap :: forall a b c d. (a -> b) -> (c -> d) -> f a c -> f b d
 ```
 
+A `Bifunctor` is a `Functor` from the pair category `(Type, Type)` to `Type`.
+
+A type constructor with two type arguments can be made into a `Bifunctor` if
+both of its type arguments are covariant.
+
+The `bimap` function maps a pair of functions over the two type arguments
+of the bifunctor.
+
+Laws:
+
+- Identity: `bimap id id == id`
+- Composition: `bimap f1 g1 <<< bimap f2 g2 == bimap (f1 <<< f2) (g1 <<< g2)`
+
 
 #### `lmap`
 
@@ -177,6 +219,7 @@ class Bifunctor f where
 lmap :: forall f a b c. (Bifunctor f) => (a -> b) -> f a c -> f b c
 ```
 
+Map a function over the first type argument of a `Bifunctor`.
 
 #### `rmap`
 
@@ -184,6 +227,7 @@ lmap :: forall f a b c. (Bifunctor f) => (a -> b) -> f a c -> f b c
 rmap :: forall f a b c. (Bifunctor f) => (b -> c) -> f a b -> f a c
 ```
 
+Map a function over the second type component of a `Bifunctor`.
 
 #### `bifunctorEither`
 
@@ -290,6 +334,8 @@ data Flip p a b
   = Flip (p b a)
 ```
 
+Flips the order of the type arguments of a `Bifunctor`, creating a
+`Functor` instance for the first type argument.
 
 #### `runFlip`
 
@@ -297,6 +343,7 @@ data Flip p a b
 runFlip :: forall p a b. Flip p a b -> p b a
 ```
 
+Remove the `Flip` constructor.
 
 #### `flipBifunctor`
 
@@ -364,6 +411,8 @@ data Join p a
   = Join (p a a)
 ```
 
+`Join` turns a `Bifunctor` into a `Functor` by equating the
+two type arguments.
 
 #### `runJoin`
 
@@ -371,6 +420,7 @@ data Join p a
 runJoin :: forall p a. Join p a -> p a a
 ```
 
+Remove the `Join` constructor.
 
 #### `joinFunctor`
 
@@ -491,6 +541,7 @@ data Product f g a b
   = Pair (f a b) (g a b)
 ```
 
+The product of two `Bifunctor`s.
 
 #### `productBifunctor`
 
@@ -536,6 +587,8 @@ data Wrap p a b
   = Wrap (p a b)
 ```
 
+A `newtype` wrapper which provides default `Functor`, `Foldable` and `Traversable`
+type class instances for `Bifunctor`s.
 
 #### `unwrap`
 
@@ -543,6 +596,7 @@ data Wrap p a b
 unwrap :: forall p a b. Wrap p a b -> p a b
 ```
 
+Remove the `Wrap` constructor.
 
 #### `wrapBifunctor`
 
@@ -611,6 +665,13 @@ class (Bifunctor t, Bifoldable t) <= Bitraversable t where
   bisequence :: forall f a b. (Applicative f) => t (f a) (f b) -> f (t a b)
 ```
 
+`Bitraversable` represents data structures with two type arguments which can be 
+traversed.
+
+A traversal for such a structure requires two functions, one for each type 
+argument. Type class instances should choose the appropriate function based
+on the type of the element encountered at each point of the traversal.
+
 
 #### `bitraversableTuple`
 
@@ -638,3 +699,5 @@ instance bitraversableConst :: Bitraversable Const
 ``` purescript
 bifor :: forall t f a b c d. (Bitraversable t, Applicative f) => t a b -> (a -> f c) -> (b -> f d) -> f (t c d)
 ```
+
+Traverse a data structure, accumulating effects and results using an `Applicative` functor.

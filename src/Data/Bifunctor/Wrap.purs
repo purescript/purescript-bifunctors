@@ -11,8 +11,11 @@ import Control.Apply
 import Control.Biapplicative
 import Control.Biapply
 
+-- | A `newtype` wrapper which provides default `Functor`, `Foldable` and `Traversable`
+-- | type class instances for `Bifunctor`s.
 data Wrap p a b = Wrap (p a b)
 
+-- | Remove the `Wrap` constructor.
 unwrap :: forall p a b. Wrap p a b -> p a b
 unwrap (Wrap pab) = pab
 
