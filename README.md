@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/purescript/purescript-bifunctors.svg?branch=master)](https://travis-ci.org/purescript/purescript-bifunctors)
 
-This library provides a 32-bit `Int` type for PureScript along with corresponding bitwise operations.
+Bifunctors and biapplicatives.
 
 ## Installation
 
