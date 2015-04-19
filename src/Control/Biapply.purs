@@ -1,10 +1,6 @@
 module Control.Biapply where
 
 import Data.Bifunctor
-import Data.Const
-import Data.Tuple
-
-import Control.Apply
 
 infixl 4 <<$>>
 infixl 4 <<*>>
@@ -40,9 +36,3 @@ bilift2 f g a b = bimap f g <<$>> a <<*>> b
 -- | Lift a function of three arguments.
 bilift3 :: forall w a b c d e f g h. (Biapply w) => (a -> b -> c -> d) -> (e -> f -> g -> h) -> w a e -> w b f -> w c g -> w d h
 bilift3 f g a b c = bimap f g <<$>> a <<*>> b <<*>> c
-
-instance biapplyTuple :: Biapply Tuple where
-  (<<*>>) (Tuple f g) (Tuple a b) = Tuple (f a) (g b)
-
-instance biapplyConst :: Biapply Const where
-  (<<*>>) (Const f) (Const x) = Const (f x)
