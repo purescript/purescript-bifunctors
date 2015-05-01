@@ -16,10 +16,14 @@ infixl 4 *>>
 (<<$>>) :: forall a b. (a -> b) -> a -> b
 (<<$>>) = id
 
+-- | An infix version of `biapply`.
+(<<*>>) :: forall w a b c d. (Biapply w) => w (a -> b) (c -> d) -> w a c -> w b d
+(<<*>>) = biapply
+
 -- | `Biapply` captures type constructors of two arguments which support lifting of
 -- | functions of one or more arguments, in the sense of `Apply`.
 class (Bifunctor w) <= Biapply w where
-  (<<*>>) :: forall a b c d. w (a -> b) (c -> d) -> w a c -> w b d
+  biapply :: forall a b c d. w (a -> b) (c -> d) -> w a c -> w b d
 
 -- | Keep the results of the second computation
 (*>>) :: forall w a b c d. (Biapply w) => w a b -> w c d -> w c d

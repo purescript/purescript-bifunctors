@@ -11,13 +11,13 @@ runJoker :: forall g a b. Joker g a b -> g b
 runJoker (Joker gb) = gb
 
 instance jokerBifunctor :: (Functor g) => Bifunctor (Joker g) where
-  bimap _ g = Joker <<< ((<$>) g) <<< runJoker
+  bimap _ g = Joker <<< map g <<< runJoker
 
 instance jokerFunctor :: (Functor g) => Functor (Joker g a) where
-  (<$>) g = Joker <<< ((<$>) g) <<< runJoker
+  map g = Joker <<< map g <<< runJoker
 
 instance jokerBiapply :: (Apply g) => Biapply (Joker g) where
-  (<<*>>) (Joker fg) (Joker xy) = Joker (fg <*> xy)
+  biapply (Joker fg) (Joker xy) = Joker (fg <*> xy)
 
 instance jokerBiapplicative :: (Applicative g) => Biapplicative (Joker g) where
   bipure _ b = Joker (pure b)

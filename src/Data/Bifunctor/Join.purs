@@ -13,10 +13,10 @@ runJoin :: forall p a. Join p a -> p a a
 runJoin (Join paa) = paa
 
 instance joinFunctor :: (Bifunctor p) => Functor (Join p) where
-  (<$>) f = Join <$> bimap f f <<< runJoin
+  map f = Join <$> bimap f f <<< runJoin
 
 instance joinApply :: (Biapply p) => Apply (Join p) where
-  (<*>) (Join f) (Join a) = Join (f <<*>> a)
+  apply (Join f) (Join a) = Join (f <<*>> a)
 
 instance joinApplicative :: (Biapplicative p) => Applicative (Join p) where
   pure a = Join (bipure a a)
