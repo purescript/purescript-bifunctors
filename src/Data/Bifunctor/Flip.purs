@@ -12,13 +12,13 @@ runFlip :: forall p a b. Flip p a b -> p b a
 runFlip (Flip pba) = pba
 
 instance flipBifunctor :: (Bifunctor p) => Bifunctor (Flip p) where
-  bimap f g = Flip <<< (bimap g f) <<< runFlip
+  bimap f g = Flip <<< bimap g f <<< runFlip
 
 instance flipFunctor :: (Bifunctor p) => Functor (Flip p a) where
-  (<$>) f = Flip <<< lmap f <<< runFlip
+  map f = Flip <<< lmap f <<< runFlip
 
 instance flipBiapply :: (Biapply p) => Biapply (Flip p) where
-  (<<*>>) (Flip fg) (Flip xy) = Flip (fg <<*>> xy)
+  biapply (Flip fg) (Flip xy) = Flip (fg <<*>> xy)
 
 instance flipBiapplicative :: (Biapplicative p) => Biapplicative (Flip p) where
   bipure a b = Flip (bipure b a)

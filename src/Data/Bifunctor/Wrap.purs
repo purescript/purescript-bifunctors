@@ -13,13 +13,13 @@ unwrap :: forall p a b. Wrap p a b -> p a b
 unwrap (Wrap pab) = pab
 
 instance wrapBifunctor :: (Bifunctor p) => Bifunctor (Wrap p) where
-  bimap f g = Wrap <<< (bimap f g) <<< unwrap
+  bimap f g = Wrap <<< bimap f g <<< unwrap
 
 instance wrapFunctor :: (Bifunctor p) => Functor (Wrap p a) where
-  (<$>) f = Wrap <<< rmap f <<< unwrap
+  map f = Wrap <<< rmap f <<< unwrap
 
 instance wrapBiapply :: (Biapply p) => Biapply (Wrap p) where
-  (<<*>>) (Wrap fg) (Wrap xy) = Wrap (fg <<*>> xy)
+  biapply (Wrap fg) (Wrap xy) = Wrap (fg <<*>> xy)
 
 instance wrapBiapplicative :: (Biapplicative p) => Biapplicative (Wrap p) where
   bipure a b = Wrap (bipure a b)

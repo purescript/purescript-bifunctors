@@ -11,7 +11,7 @@ instance productBifunctor :: (Bifunctor f, Bifunctor g) => Bifunctor (Product f 
   bimap f g (Pair x y) = Pair (bimap f g x) (bimap f g y)
 
 instance productBiapply :: (Biapply f, Biapply g) => Biapply (Product f g) where
-  (<<*>>) (Pair w x) (Pair y z) = Pair (w <<*>> y) (x <<*>> z)
+  biapply (Pair w x) (Pair y z) = Pair (biapply w y) (biapply x z)
 
 instance productBiapplicative :: (Biapplicative f, Biapplicative g) => Biapplicative (Product f g) where
   bipure a b = Pair (bipure a b) (bipure a b)

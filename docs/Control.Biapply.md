@@ -15,11 +15,19 @@ the style of `Applicative`:
 bipure f g <<$>> x <<*>> y
 ```
 
+#### `(<<*>>)`
+
+``` purescript
+(<<*>>) :: forall w a b c d. (Biapply w) => w (a -> b) (c -> d) -> w a c -> w b d
+```
+
+An infix version of `biapply`.
+
 #### `Biapply`
 
 ``` purescript
 class (Bifunctor w) <= Biapply w where
-  (<<*>>) :: forall a b c d. w (a -> b) (c -> d) -> w a c -> w b d
+  biapply :: forall a b c d. w (a -> b) (c -> d) -> w a c -> w b d
 ```
 
 `Biapply` captures type constructors of two arguments which support lifting of
