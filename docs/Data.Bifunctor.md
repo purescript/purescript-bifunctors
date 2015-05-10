@@ -1,5 +1,3 @@
-# Module Documentation
-
 ## Module Data.Bifunctor
 
 #### `Bifunctor`
@@ -38,6 +36,5 @@ rmap :: forall f a b c. (Bifunctor f) => (b -> c) -> f a b -> f a c
 ```
 
 Map a function over the second type arguments of a `Bifunctor`.
-
 
 

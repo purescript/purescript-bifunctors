@@ -1,5 +1,3 @@
-# Module Documentation
-
 ## Module Data.Bifunctor.Joker
 
 #### `Joker`
@@ -9,6 +7,14 @@ data Joker g a b
   = Joker (g b)
 ```
 
+##### Instances
+``` purescript
+instance jokerBifunctor :: (Functor g) => Bifunctor (Joker g)
+instance jokerFunctor :: (Functor g) => Functor (Joker g a)
+instance jokerBiapply :: (Apply g) => Biapply (Joker g)
+instance jokerBiapplicative :: (Applicative g) => Biapplicative (Joker g)
+```
+
 Make a `Functor` over the second argument of a `Bifunctor`
 
 #### `runJoker`
@@ -16,35 +22,5 @@ Make a `Functor` over the second argument of a `Bifunctor`
 ``` purescript
 runJoker :: forall g a b. Joker g a b -> g b
 ```
-
-
-#### `jokerBifunctor`
-
-``` purescript
-instance jokerBifunctor :: (Functor g) => Bifunctor (Joker g)
-```
-
-
-#### `jokerFunctor`
-
-``` purescript
-instance jokerFunctor :: (Functor g) => Functor (Joker g a)
-```
-
-
-#### `jokerBiapply`
-
-``` purescript
-instance jokerBiapply :: (Apply g) => Biapply (Joker g)
-```
-
-
-#### `jokerBiapplicative`
-
-``` purescript
-instance jokerBiapplicative :: (Applicative g) => Biapplicative (Joker g)
-```
-
-
 
 

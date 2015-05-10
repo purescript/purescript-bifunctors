@@ -1,51 +1,47 @@
+/* jshint node: true */
 "use strict";
 
 var gulp = require("gulp");
 var plumber = require("gulp-plumber");
 var purescript = require("gulp-purescript");
-var jsvalidate = require("gulp-jsvalidate");
 
-var paths = [
+var sources = [
   "src/**/*.purs",
   "bower_components/purescript-*/src/**/*.purs"
 ];
 
+var foreigns = [
+  "bower_components/purescript-*/src/**/*.js"
+];
+
 gulp.task("make", function() {
-  return gulp.src(paths)
+  return gulp.src(sources)
     .pipe(plumber())
-    .pipe(purescript.pscMake());
+    .pipe(purescript.pscMake({ ffi: foreigns }));
 });
 
-gulp.task("jsvalidate", ["make"], function () {
-  return gulp.src("output/**/*.js")
+gulp.task("docs", function () {
+  return gulp.src(sources)
     .pipe(plumber())
-    .pipe(jsvalidate());
+    .pipe(purescript.pscDocs({
+      docgen: {
+        "Control.Biapplicative": "docs/Control.Biapplicative.md",
+        "Control.Biapply": "docs/Control.Biapply.md",
+        "Data.Bifunctor": "docs/Data.Bifunctor.md",
+        "Data.Bifunctor.Clown": "docs/Data.Bifunctor.Clown.md",
+        "Data.Bifunctor.Flip": "docs/Data.Bifunctor.Flip.md",
+        "Data.Bifunctor.Join": "docs/Data.Bifunctor.Join.md",
+        "Data.Bifunctor.Joker": "docs/Data.Bifunctor.Joker.md",
+        "Data.Bifunctor.Product": "docs/Data.Bifunctor.Product.md",
+        "Data.Bifunctor.Wrap": "docs/Data.Bifunctor.Wrap.md"
+      }
+    }));
 });
-
-var docTasks = [];
-
-var docTask = function(name) {
-  var taskName = "docs-" + name.toLowerCase();
-  gulp.task(taskName, function () {
-    return gulp.src("src/" + name.replace(/\./g, "/") + ".purs")
-      .pipe(plumber())
-      .pipe(purescript.pscDocs())
-      .pipe(gulp.dest("docs/" + name + ".md"));
-  });
-  docTasks.push(taskName);
-};
-
-["Control.Biapplicative", "Control.Biapply", "Data.Bifunctor",
- "Data.Bifunctor.Clown", "Data.Bifunctor.Flip", "Data.Bifunctor.Join",
- "Data.Bifunctor.Joker", "Data.Bifunctor.Product", "Data.Bifunctor.Wrap"
- ].forEach(docTask);
-
-gulp.task("docs", docTasks);
 
 gulp.task("dotpsci", function () {
-  return gulp.src(paths)
+  return gulp.src(sources)
     .pipe(plumber())
     .pipe(purescript.dotPsci());
 });
 
-gulp.task("default", ["jsvalidate", "docs", "dotpsci"]);
+gulp.task("default", ["make", "docs", "dotpsci"]);

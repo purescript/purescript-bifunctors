@@ -1,5 +1,3 @@
-# Module Documentation
-
 ## Module Control.Biapply
 
 #### `(<<$>>)`
@@ -15,14 +13,6 @@ the style of `Applicative`:
 bipure f g <<$>> x <<*>> y
 ```
 
-#### `(<<*>>)`
-
-``` purescript
-(<<*>>) :: forall w a b c d. (Biapply w) => w (a -> b) (c -> d) -> w a c -> w b d
-```
-
-An infix version of `biapply`.
-
 #### `Biapply`
 
 ``` purescript
@@ -32,6 +22,14 @@ class (Bifunctor w) <= Biapply w where
 
 `Biapply` captures type constructors of two arguments which support lifting of
 functions of one or more arguments, in the sense of `Apply`.
+
+#### `(<<*>>)`
+
+``` purescript
+(<<*>>) :: forall w a b c d. (Biapply w) => w (a -> b) (c -> d) -> w a c -> w b d
+```
+
+An infix version of `biapply`.
 
 #### `(*>>)`
 
@@ -64,6 +62,5 @@ bilift3 :: forall w a b c d e f g h. (Biapply w) => (a -> b -> c -> d) -> (e -> 
 ```
 
 Lift a function of three arguments.
-
 
 

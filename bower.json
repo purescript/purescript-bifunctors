@@ -1,5 +1,7 @@
 {
   "name": "purescript-bifunctors",
+  "homepage": "https://github.com/purescript/purescript-bifunctors",
+  "description": "Bifunctors and biapplicatives",
   "keywords": [
     "purescript",
     "bifunctor",
@@ -11,11 +13,16 @@
     "Dylan Lukes <lukes.dylan@gmail.com>"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/purescript/purescript-bifunctors.git"
+  },
   "ignore": [
     "**/.*",
     "bower_components",
     "node_modules",
     "output",
+    "test",
     "bower.json",
     "gulpfile.js",
     "package.json"
