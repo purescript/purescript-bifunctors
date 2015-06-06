@@ -1,5 +1,7 @@
 module Data.Bifunctor where
 
+import Prelude
+
 -- | A `Bifunctor` is a `Functor` from the pair category `(Type, Type)` to `Type`.
 -- |
 -- | A type constructor with two type arguments can be made into a `Bifunctor` if

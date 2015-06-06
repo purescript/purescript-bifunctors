@@ -1,5 +1,7 @@
 module Control.Biapplicative where
 
+import Prelude
+
 import Control.Biapply
 
 -- | `Biapplicative` captures type constructors of two arguments which support lifting of

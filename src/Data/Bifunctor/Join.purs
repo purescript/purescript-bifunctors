@@ -1,5 +1,7 @@
 module Data.Bifunctor.Join where
 
+import Prelude
+
 import Control.Biapplicative
 import Control.Biapply
 import Data.Bifunctor

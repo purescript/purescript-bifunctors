@@ -1,5 +1,7 @@
 module Control.Biapply where
 
+import Prelude
+
 import Data.Bifunctor
 
 infixl 4 <<$>>

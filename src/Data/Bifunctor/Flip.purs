@@ -1,5 +1,7 @@
 module Data.Bifunctor.Flip where
 
+import Prelude
+
 import Control.Biapplicative
 import Control.Biapply
 import Data.Bifunctor
