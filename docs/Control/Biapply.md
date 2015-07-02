@@ -6,6 +6,8 @@
 (<<$>>) :: forall a b. (a -> b) -> a -> b
 ```
 
+_left-associative / precedence 4_
+
 A convenience function which can be used to apply the result of `bipure` in
 the style of `Applicative`:
 
@@ -29,6 +31,8 @@ functions of one or more arguments, in the sense of `Apply`.
 (<<*>>) :: forall w a b c d. (Biapply w) => w (a -> b) (c -> d) -> w a c -> w b d
 ```
 
+_left-associative / precedence 4_
+
 An infix version of `biapply`.
 
 #### `(*>>)`
@@ -37,6 +41,8 @@ An infix version of `biapply`.
 (*>>) :: forall w a b c d. (Biapply w) => w a b -> w c d -> w c d
 ```
 
+_left-associative / precedence 4_
+
 Keep the results of the second computation
 
 #### `(<<*)`
@@ -44,6 +50,8 @@ Keep the results of the second computation
 ``` purescript
 (<<*) :: forall w a b c d. (Biapply w) => w a b -> w c d -> w a b
 ```
+
+_left-associative / precedence 4_
 
 Keep the results of the first computation
 
