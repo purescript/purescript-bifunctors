@@ -1,24 +1,26 @@
 module Data.Bifunctor.Join where
 
-import Prelude
+import Control.Applicative (class Applicative)
+import Control.Apply (class Apply)
+import Control.Biapplicative (class Biapplicative, bipure)
+import Control.Biapply (class Biapply, (<<*>>))
+import Control.Semigroupoid ((<<<))
 
-import Control.Biapplicative
-import Control.Biapply
-import Data.Bifunctor
+import Data.Bifunctor (class Bifunctor, bimap)
+import Data.Functor (class Functor, (<$>))
 
--- | `Join` turns a `Bifunctor` into a `Functor` by equating the
--- | two type arguments.
+-- | Turns a `Bifunctor` into a `Functor` by equating the two type arguments.
 data Join p a = Join (p a a)
 
 -- | Remove the `Join` constructor.
 runJoin :: forall p a. Join p a -> p a a
 runJoin (Join paa) = paa
 
-instance joinFunctor :: (Bifunctor p) => Functor (Join p) where
+instance bifunctorJoin :: Bifunctor p => Functor (Join p) where
   map f = Join <$> bimap f f <<< runJoin
 
-instance joinApply :: (Biapply p) => Apply (Join p) where
+instance biapplyJoin :: Biapply p => Apply (Join p) where
   apply (Join f) (Join a) = Join (f <<*>> a)
 
-instance joinApplicative :: (Biapplicative p) => Applicative (Join p) where
+instance biapplicativeJoin :: Biapplicative p => Applicative (Join p) where
   pure a = Join (bipure a a)

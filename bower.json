@@ -2,16 +2,6 @@
   "name": "purescript-bifunctors",
   "homepage": "https://github.com/purescript/purescript-bifunctors",
   "description": "Bifunctors and biapplicatives",
-  "keywords": [
-    "purescript",
-    "bifunctor",
-    "biapply",
-    "biapplicative"
-  ],
-  "authors": [
-    "Gary Burgess <gary.burgess@gmail.com>",
-    "Dylan Lukes <lukes.dylan@gmail.com>"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -27,6 +17,6 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-control": "^0.3.0"
+    "purescript-control": "^1.0.0-rc.1"
   }
 }
