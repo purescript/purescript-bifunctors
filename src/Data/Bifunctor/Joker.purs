@@ -10,7 +10,7 @@ import Data.Bifunctor (class Bifunctor)
 import Data.Functor (class Functor, map)
 
 -- | Make a `Functor` over the second argument of a `Bifunctor`
-data Joker g a b = Joker (g b)
+newtype Joker g a b = Joker (g b)
 
 -- | Remove the `Joker` constructor.
 runJoker :: forall g a b. Joker g a b -> g b

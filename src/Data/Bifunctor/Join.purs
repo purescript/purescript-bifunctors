@@ -10,7 +10,7 @@ import Data.Bifunctor (class Bifunctor, bimap)
 import Data.Functor (class Functor, (<$>))
 
 -- | Turns a `Bifunctor` into a `Functor` by equating the two type arguments.
-data Join p a = Join (p a a)
+newtype Join p a = Join (p a a)
 
 -- | Remove the `Join` constructor.
 runJoin :: forall p a. Join p a -> p a a
