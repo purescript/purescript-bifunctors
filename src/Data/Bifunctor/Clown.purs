@@ -10,7 +10,7 @@ import Data.Bifunctor (class Bifunctor)
 import Data.Functor (class Functor, map)
 
 -- | Make a `Functor` over the first argument of a `Bifunctor`
-data Clown f a b = Clown (f a)
+newtype Clown f a b = Clown (f a)
 
 -- | Remove the `Clown` constructor.
 runClown :: forall f a b. Clown f a b -> f a

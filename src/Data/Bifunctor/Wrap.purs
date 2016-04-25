@@ -8,7 +8,7 @@ import Data.Bifunctor (class Bifunctor, bimap, rmap)
 import Data.Functor (class Functor)
 
 -- | Provides a `Functor` over the second argument of a `Bifunctor`.
-data Wrap p a b = Wrap (p a b)
+newtype Wrap p a b = Wrap (p a b)
 
 -- | Remove the `Wrap` constructor.
 unwrap :: forall p a b. Wrap p a b -> p a b

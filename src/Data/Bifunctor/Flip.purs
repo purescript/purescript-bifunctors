@@ -8,7 +8,7 @@ import Data.Bifunctor (class Bifunctor, bimap, lmap)
 import Data.Functor (class Functor)
 
 -- | Flips the order of the type arguments of a `Bifunctor`.
-data Flip p a b = Flip (p b a)
+newtype Flip p a b = Flip (p b a)
 
 -- | Remove the `Flip` constructor.
 runFlip :: forall p a b. Flip p a b -> p b a
