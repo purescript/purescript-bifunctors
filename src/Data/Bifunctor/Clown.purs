@@ -1,26 +1,30 @@
 module Data.Bifunctor.Clown where
 
-import Control.Applicative (class Applicative, pure)
-import Control.Apply (class Apply, (<*>))
+import Prelude
+
 import Control.Biapplicative (class Biapplicative)
 import Control.Biapply (class Biapply)
-import Control.Semigroupoid ((<<<))
 
 import Data.Bifunctor (class Bifunctor)
-import Data.Functor (class Functor, map)
+import Data.Newtype (class Newtype)
 
 -- | Make a `Functor` over the first argument of a `Bifunctor`
 newtype Clown f a b = Clown (f a)
 
--- | Remove the `Clown` constructor.
-runClown :: forall f a b. Clown f a b -> f a
-runClown (Clown fa) = fa
+derive instance newtypeClown :: Newtype (Clown f a b) _
 
-instance bifunctorClown :: Functor f => Bifunctor (Clown f) where
-  bimap f _ = Clown <<< map f <<< runClown
+derive newtype instance eqClown :: Eq (f a) => Eq (Clown f a b)
+
+derive newtype instance ordClown :: Ord (f a) => Ord (Clown f a b)
+
+instance showClown :: Show (f a) => Show (Clown f a b) where
+  show (Clown x) = "(Clown " <> show x <> ")"
 
 instance functorClown :: Functor (Clown f a) where
-  map _ = Clown <<< runClown
+  map _ (Clown a) = Clown a
+
+instance bifunctorClown :: Functor f => Bifunctor (Clown f) where
+  bimap f _ (Clown a) = Clown (map f a)
 
 instance biapplyClown :: Apply f => Biapply (Clown f) where
   biapply (Clown fg) (Clown xy) = Clown (fg <*> xy)
