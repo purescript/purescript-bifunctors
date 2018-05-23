@@ -2,7 +2,7 @@
   "name": "purescript-bifunctors",
   "homepage": "https://github.com/purescript/purescript-bifunctors",
   "description": "Bifunctors and biapplicatives",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "git://github.com/purescript/purescript-bifunctors.git"
@@ -17,7 +17,7 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-control": "purescript/purescript-control#compiler/0.12",
-    "purescript-newtype": "purescript/purescript-newtype#compiler/0.12"
+    "purescript-prelude": "^4.0.0",
+    "purescript-newtype": "^3.0.0"
   }
 }
