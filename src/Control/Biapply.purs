@@ -1,6 +1,6 @@
 module Control.Biapply where
 
-import Data.Function (const, id)
+import Data.Function (const, identity)
 
 import Data.Bifunctor (class Bifunctor, bimap)
 
@@ -10,7 +10,7 @@ import Data.Bifunctor (class Bifunctor, bimap)
 -- | ```purescript
 -- | bipure f g <<$>> x <<*>> y
 -- | ```
-infixl 4 id as <<$>>
+infixl 4 identity as <<$>>
 
 -- | `Biapply` captures type constructors of two arguments which support lifting of
 -- | functions of one or more arguments, in the sense of `Apply`.
@@ -21,7 +21,7 @@ infixl 4 biapply as <<*>>
 
 -- | Keep the results of the second computation.
 biapplyFirst :: forall w a b c d. Biapply w => w a b -> w c d -> w c d
-biapplyFirst a b = bimap (const id) (const id) <<$>> a <<*>> b
+biapplyFirst a b = bimap (const identity) (const identity) <<$>> a <<*>> b
 
 infixl 4 biapplyFirst as *>>
 
