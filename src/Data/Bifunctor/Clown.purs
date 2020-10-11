@@ -9,6 +9,7 @@ import Data.Bifunctor (class Bifunctor)
 import Data.Newtype (class Newtype)
 
 -- | Make a `Functor` over the first argument of a `Bifunctor`
+newtype Clown :: forall k1 k2. (k1 -> Type) -> k1 -> k2 -> Type
 newtype Clown f a b = Clown (f a)
 
 derive instance newtypeClown :: Newtype (Clown f a b) _
