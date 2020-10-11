@@ -9,6 +9,7 @@ import Data.Bifunctor (class Bifunctor, bimap)
 import Data.Newtype (class Newtype)
 
 -- | Turns a `Bifunctor` into a `Functor` by equating the two type arguments.
+newtype Join :: forall k. (k -> k -> Type) -> k -> Type
 newtype Join p a = Join (p a a)
 
 derive instance newtypeJoin :: Newtype (Join p a) _

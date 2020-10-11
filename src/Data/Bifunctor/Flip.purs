@@ -9,6 +9,7 @@ import Data.Bifunctor (class Bifunctor, bimap, lmap)
 import Data.Newtype (class Newtype)
 
 -- | Flips the order of the type arguments of a `Bifunctor`.
+newtype Flip :: forall k1 k2. (k1 -> k2 -> Type) -> k2 -> k1 -> Type
 newtype Flip p a b = Flip (p b a)
 
 derive instance newtypeFlip :: Newtype (Flip p a b) _

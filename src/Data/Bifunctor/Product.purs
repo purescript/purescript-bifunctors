@@ -8,6 +8,7 @@ import Control.Biapply (class Biapply, biapply)
 import Data.Bifunctor (class Bifunctor, bimap)
 
 -- | The product of two `Bifunctor`s.
+data Product :: forall k1 k2. (k1 -> k2 -> Type) -> (k1 -> k2 -> Type) -> k1 -> k2 -> Type
 data Product f g a b = Product (f a b) (g a b)
 
 derive instance eqProduct :: (Eq (f a b), Eq (g a b)) => Eq (Product f g a b)
