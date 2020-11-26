@@ -1,6 +1,6 @@
 module Control.MonadLeft where
 
-import Control.Biapplicative (class Biapplicative)
+import Control.ApplicativeLeft (class ApplicativeLeft)
 import Control.BindLeft (class BindLeft)
 
-class (Biapplicative m, BindLeft m) <= MonadLeft m
+class (ApplicativeLeft m, BindLeft m) <= MonadLeft m
