@@ -1,14 +1,14 @@
 # purescript-bifunctors
 
 [![Latest release](http://img.shields.io/github/release/purescript/purescript-bifunctors.svg)](https://github.com/purescript/purescript-bifunctors/releases)
-[![Build status](https://travis-ci.org/purescript/purescript-bifunctors.svg?branch=master)](https://travis-ci.org/purescript/purescript-bifunctors)
+[![Build status](https://github.com/purescript/purescript-bifunctors/workflows/CI/badge.svg?branch=master)](https://github.com/purescript/purescript-bifunctors/actions?query=workflow%3ACI+branch%3Amaster)
 
 Bifunctors and biapplicatives.
 
 ## Installation
 
 ```
-bower install purescript-bifunctors
+spago install bifunctors
 ```
 
 ## Documentation
