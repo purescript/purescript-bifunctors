@@ -4,8 +4,8 @@ import Prelude
 import Control.ApplyLeft (class ApplyLeft, lapply)
 
 -- | Same as `Applicative` but works on the left parameter in a Bifunctor.
-class ApplyLeft w <= ApplicativeLeft w where
-  lpure :: forall a b. a -> w a b
+class ApplyLeft m <= ApplicativeLeft m where
+  lpure :: forall a b. a -> m a b
 
 -- | Perform an applicative action when a condition is true.
 whenLeft :: forall m c. ApplicativeLeft m => Boolean -> m Unit c -> m Unit c
