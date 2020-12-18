@@ -17,14 +17,14 @@ class BindLeft :: forall k. (Type -> k -> Type) -> Constraint
 class BindLeft m where
   lbind :: forall a b r. m a r -> (a -> m b r) -> m b r
 
-ljoin :: forall m a r. BindLeft m => m (m a r) r -> m a r
-ljoin m = lbind m identity
+joinLeft :: forall m a r. BindLeft m => m (m a r) r -> m a r
+joinLeft m = lbind m identity
 
-lcomposeKleisli :: forall m a b c r. BindLeft m => (a -> m b r) -> (b -> m c r) -> a -> m c r
-lcomposeKleisli aToMB bToMC a = lbind (aToMB a) bToMC
+composeKleisliLeft :: forall m a b c r. BindLeft m => (a -> m b r) -> (b -> m c r) -> a -> m c r
+composeKleisliLeft aToMB bToMC a = lbind (aToMB a) bToMC
 
-lcomposeKleisliFlipped :: forall m a b c r. BindLeft m => (b -> m c r) -> (a -> m b r) -> a -> m c r
-lcomposeKleisliFlipped bToMC aToMB a = lbind (aToMB a) bToMC
+composeKleisliFlippedLeft :: forall m a b c r. BindLeft m => (b -> m c r) -> (a -> m b r) -> a -> m c r
+composeKleisliFlippedLeft bToMC aToMB a = lbind (aToMB a) bToMC
 
-lifM :: forall m a r. BindLeft m => m Boolean r -> m a r -> m a r -> m a r
-lifM cond truePath falsePath = lbind cond \b -> if b then truePath else falsePath
+ifMLeft :: forall m a r. BindLeft m => m Boolean r -> m a r -> m a r -> m a r
+ifMLeft cond truePath falsePath = lbind cond \b -> if b then truePath else falsePath
