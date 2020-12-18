@@ -21,10 +21,10 @@ joinLeft :: forall m a r. BindLeft m => m (m a r) r -> m a r
 joinLeft m = lbind m identity
 
 composeKleisliLeft :: forall m a b c r. BindLeft m => (a -> m b r) -> (b -> m c r) -> a -> m c r
-composeKleisliLeft aToMB bToMC a = lbind (aToMB a) bToMC
+composeKleisliLeft f g a = lbind (f a) g
 
 composeKleisliFlippedLeft :: forall m a b c r. BindLeft m => (b -> m c r) -> (a -> m b r) -> a -> m c r
-composeKleisliFlippedLeft bToMC aToMB a = lbind (aToMB a) bToMC
+composeKleisliFlippedLeft f g a = lbind (g a) f
 
 ifMLeft :: forall m a r. BindLeft m => m Boolean r -> m a r -> m a r -> m a r
 ifMLeft cond truePath falsePath = lbind cond \b -> if b then truePath else falsePath
