@@ -9,7 +9,7 @@ class DiscardLeft a where
   ldiscard :: forall k (m :: Type -> k -> Type) b r. BindLeft m => m a r -> (a -> m b r) -> m b r
 
 instance discardLeftUnit :: DiscardLeft Unit where
-  ldiscard ma aToMB = lbind ma aToMB
+  ldiscard = lbind
 
 -- | Same as `Bind` but works on the left parameter of the bifunctor
 -- | rather than the right parameter, which is the default for `Bind`.
