@@ -8,7 +8,7 @@ class Bifunctor m <= ApplyLeft m where
   lapply :: forall a b c. m (a -> b) c -> m a c -> m b c
 
 -- | Combine two effectful actions, keeping only the result of the first.
-applyFirstLeft :: forall a b c w. ApplyLeft m => m a c -> m b c -> m a c
+applyFirstLeft :: forall a b c m. ApplyLeft m => m a c -> m b c -> m a c
 applyFirstLeft a b = lapply (lmap const a) b
 
 -- | Combine two effectful actions, keeping only the result of the second.
