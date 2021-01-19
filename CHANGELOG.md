@@ -5,12 +5,15 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
+  - Added support for PureScript 0.14 and dropped support for all previous versions (#16)
 
 New features:
 
 Bugfixes:
 
 Other improvements:
+  - Migrated CI to GitHub Actions and updated installation instructions to use Spago (#18)
+  - Added a CHANGELOG.md file and pull request template (#19, #20)
 
 ## [v4.0.0](https://github.com/purescript/purescript-bifunctors/releases/tag/v4.0.0) - 2018-05-23
 
