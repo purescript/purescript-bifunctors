@@ -6,6 +6,7 @@ Notable changes to this project are documented in this file. The format is based
 
 Breaking changes:
   - Added support for PureScript 0.14 and dropped support for all previous versions (#16)
+  - Ported `Clown`, `Joker`, and `Product` to `purescript-functors` (#21)
 
 New features:
 

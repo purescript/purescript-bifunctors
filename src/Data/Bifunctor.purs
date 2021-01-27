@@ -1,5 +1,11 @@
 module Data.Bifunctor where
 
+import Data.Functor (class Functor, map)
+import Data.Functor.Clown (Clown(..))
+import Data.Functor.Joker (Joker(..))
+import Data.Functor.Product2 (Product2(..))
+import Control.Biapplicative (class Biapplicative, bipure)
+import Control.Biapply (class Biapply, biapply)
 import Control.Category (identity)
 
 -- | A `Bifunctor` is a `Functor` from the pair category `(Type, Type)` to `Type`.
@@ -17,6 +23,15 @@ import Control.Category (identity)
 -- |
 class Bifunctor f where
   bimap :: forall a b c d. (a -> b) -> (c -> d) -> f a c -> f b d
+
+instance bifunctorClown :: Functor f => Bifunctor (Clown f) where
+  bimap f _ (Clown a) = Clown (map f a)
+
+instance bifunctorJoker :: Functor g => Bifunctor (Joker g) where
+  bimap _ g (Joker a) = Joker (map g a)
+
+instance bifunctorProduct2 :: (Bifunctor f, Bifunctor g) => Bifunctor (Product2 f g) where
+  bimap f g (Product2 x y) = Product2 (bimap f g x) (bimap f g y)
 
 -- | Map a function over the first type argument of a `Bifunctor`.
 lmap :: forall f a b c. Bifunctor f => (a -> b) -> f a c -> f b c
