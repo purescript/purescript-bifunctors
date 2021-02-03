@@ -6,6 +6,8 @@ Notable changes to this project are documented in this file. The format is based
 
 Breaking changes:
   - Added support for PureScript 0.14 and dropped support for all previous versions (#16)
+  - `Clown`, `Flip`, `Joker`, and `Product` have been moved to the `Data.Functors` module in the `purescript-functors` package, so that the same types can also be used as profunctors; `Product` was renamed to `Product2` (#22)
+  - `Wrap` was deleted; it is expected that any instances of `Bifunctor` will be accompanied by a corresponding instance of `Functor` (#22)
 
 New features:
 
@@ -14,6 +16,7 @@ Bugfixes:
 Other improvements:
   - Migrated CI to GitHub Actions and updated installation instructions to use Spago (#18)
   - Added a CHANGELOG.md file and pull request template (#19, #20)
+  - This package now depends on the `purescript-const`, `purescript-either`, and `purescript-tuples` packages, and contains instances previously in those packages (#22)
 
 ## [v4.0.0](https://github.com/purescript/purescript-bifunctors/releases/tag/v4.0.0) - 2018-05-23
 
