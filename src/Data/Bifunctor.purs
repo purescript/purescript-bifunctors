@@ -1,6 +1,9 @@
 module Data.Bifunctor where
 
 import Control.Category (identity)
+import Data.Const (Const(..))
+import Data.Either (Either(..))
+import Data.Tuple (Tuple(..))
 
 -- | A `Bifunctor` is a `Functor` from the pair category `(Type, Type)` to `Type`.
 -- |
@@ -25,3 +28,13 @@ lmap f = bimap f identity
 -- | Map a function over the second type arguments of a `Bifunctor`.
 rmap :: forall f a b c. Bifunctor f => (b -> c) -> f a b -> f a c
 rmap = bimap identity
+
+instance bifunctorEither :: Bifunctor Either where
+  bimap f _ (Left l) = Left (f l)
+  bimap _ g (Right r) = Right (g r)
+
+instance bifunctorTuple :: Bifunctor Tuple where
+  bimap f g (Tuple x y) = Tuple (f x) (g y)
+
+instance bifunctorConst :: Bifunctor Const where
+  bimap f _ (Const a) = Const (f a)
