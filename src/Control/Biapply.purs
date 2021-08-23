@@ -3,6 +3,7 @@ module Control.Biapply where
 import Data.Function (const, identity)
 
 import Data.Bifunctor (class Bifunctor, bimap)
+import Data.Tuple (Tuple(..))
 
 -- | A convenience operator which can be used to apply the result of `bipure` in
 -- | the style of `Applicative`:
@@ -53,3 +54,6 @@ bilift3
   -> w c g
   -> w d h
 bilift3 f g a b c = bimap f g <<$>> a <<*>> b <<*>> c
+
+instance biapplyTuple :: Biapply Tuple where
+  biapply (Tuple f g) (Tuple a b) = Tuple (f a) (g b)
