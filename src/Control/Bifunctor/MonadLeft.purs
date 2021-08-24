@@ -4,6 +4,7 @@ import Control.Bifunctor.ApplicativeLeft (class ApplicativeLeft, whenLeft, unles
 import Control.Bifunctor.BindLeft (class BindLeft, lbind)
 import Data.Unit (Unit)
 
+class MonadLeft :: (Type -> Type -> Type) -> Constraint
 class (ApplicativeLeft m, BindLeft m) <= MonadLeft m
 
 -- | Perform a monadic action when a condition is true, where the conditional

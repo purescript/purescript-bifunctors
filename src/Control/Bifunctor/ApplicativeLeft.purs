@@ -4,6 +4,7 @@ import Prelude
 import Control.Bifunctor.ApplyLeft (class ApplyLeft)
 
 -- | Same as `Applicative` but works on the left parameter in a Bifunctor.
+class ApplicativeLeft :: (Type -> Type -> Type) -> Constraint
 class ApplyLeft m <= ApplicativeLeft m where
   lpure :: forall a b. a -> m a b
 

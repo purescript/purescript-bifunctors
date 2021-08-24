@@ -4,6 +4,7 @@ import Prelude
 import Data.Bifunctor (class Bifunctor, lmap)
 
 -- | Same as `Apply` but works on the left parameter in a Bifunctor.
+class ApplyLeft :: (Type -> Type -> Type) -> Constraint
 class Bifunctor m <= ApplyLeft m where
   lapply :: forall a b c. m (a -> b) c -> m a c -> m b c
 
