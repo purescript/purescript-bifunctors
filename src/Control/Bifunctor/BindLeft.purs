@@ -1,6 +1,6 @@
 module Control.Bifunctor.BindLeft where
 
-import Control.ApplicativeLeft (class ApplicativeLeft)
+import Control.Bifunctor.ApplicativeLeft (class ApplicativeLeft)
 import Control.Category (identity)
 import Data.Unit (Unit)
 

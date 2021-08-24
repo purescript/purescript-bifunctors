@@ -24,6 +24,7 @@
 module Control.Bifunctor.MonadLeft.Qualified where
 
 import Control.Bifunctor.ApplyLeft (class ApplyLeft, lapply)
+import Control.Bifunctor.ApplicativeLeft (class ApplicativeLeft, lpure)
 import Control.Bifunctor.BindLeft (class BindLeft, lbind, class DiscardLeft, ldiscard)
 import Data.Bifunctor (class Bifunctor, lmap)
 
