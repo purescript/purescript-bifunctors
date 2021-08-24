@@ -15,44 +15,44 @@ infixl 4 identity as <<$>>
 
 -- | `Biapply` captures type constructors of two arguments which support lifting of
 -- | functions of one or more arguments, in the sense of `Apply`.
-class Bifunctor w <= Biapply w where
-  biapply :: forall a b c d. w (a -> b) (c -> d) -> w a c -> w b d
+class Bifunctor m <= Biapply m where
+  biapply :: forall a b c d. m (a -> b) (c -> d) -> m a c -> m b d
 
 infixl 4 biapply as <<*>>
 
 -- | Keep the results of the second computation.
-biapplyFirst :: forall w a b c d. Biapply w => w a b -> w c d -> w c d
+biapplyFirst :: forall m a b c d. Biapply m => m a b -> m c d -> m c d
 biapplyFirst a b = bimap (const identity) (const identity) <<$>> a <<*>> b
 
 infixl 4 biapplyFirst as *>>
 
 -- | Keep the results of the first computation.
-biapplySecond :: forall w a b c d. Biapply w => w a b -> w c d -> w a b
+biapplySecond :: forall m a b c d. Biapply m => m a b -> m c d -> m a b
 biapplySecond a b = bimap const const <<$>> a <<*>> b
 
 infixl 4 biapplySecond as <<*
 
 -- | Lift a function of two arguments.
 bilift2
-  :: forall w a b c d e f
-   . Biapply w
+  :: forall m a b c d e f
+   . Biapply m
   => (a -> b -> c)
   -> (d -> e -> f)
-  -> w a d
-  -> w b e
-  -> w c f
+  -> m a d
+  -> m b e
+  -> m c f
 bilift2 f g a b = bimap f g <<$>> a <<*>> b
 
 -- | Lift a function of three arguments.
 bilift3
-  :: forall w a b c d e f g h
-   . Biapply w
+  :: forall m a b c d e f g h
+   . Biapply m
   => (a -> b -> c -> d)
   -> (e -> f -> g -> h)
-  -> w a e
-  -> w b f
-  -> w c g
-  -> w d h
+  -> m a e
+  -> m b f
+  -> m c g
+  -> m d h
 bilift3 f g a b c = bimap f g <<$>> a <<*>> b <<*>> c
 
 instance biapplyTuple :: Biapply Tuple where
