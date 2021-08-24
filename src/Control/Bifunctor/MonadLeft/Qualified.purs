@@ -3,20 +3,20 @@
 -- |
 -- | `ado notation` example
 -- | ```
--- | import Control.Bifunctor.MonadLeft.Qualified as MonadLeft
+-- | import Control.Bifunctor.MonadLeft.Qualified as BiLeft
 -- |
 -- | foo :: Either Int String -> Either String String
--- | foo comp = MonadLeft.ado
+-- | foo comp = BiLeft.ado
 -- |   a <- comp
 -- |   b <- comp
 -- |   in show $ a + b
 -- | ```
 -- | `do notation` example
 -- | ```
--- | import Control.Bifunctor.MonadLeft.Qualified as MonadLeft
+-- | import Control.Bifunctor.MonadLeft.Qualified as BiLeft
 -- |
 -- | foo :: Either Int String -> Either String String
--- | foo comp = MonadLeft.do
+-- | foo comp = BiLeft.do
 -- |   a <- comp
 -- |   b <- comp
 -- |   lpure $ show $ a + b
