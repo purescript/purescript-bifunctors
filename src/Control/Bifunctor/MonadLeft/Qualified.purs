@@ -38,3 +38,6 @@ apply = lapply
 
 map :: forall m a b c. Bifunctor m => (a -> b) -> m a c -> m b c
 map = lmap
+
+pure :: forall m a b. ApplicativeLeft m => a -> m a b
+pure = lpure
