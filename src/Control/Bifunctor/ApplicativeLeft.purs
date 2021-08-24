@@ -1,7 +1,7 @@
-module Control.ApplicativeLeft where
+module Control.Bifunctor.ApplicativeLeft where
 
 import Prelude
-import Control.ApplyLeft (class ApplyLeft)
+import Control.Bifunctor.ApplyLeft (class ApplyLeft)
 
 -- | Same as `Applicative` but works on the left parameter in a Bifunctor.
 class ApplyLeft m <= ApplicativeLeft m where

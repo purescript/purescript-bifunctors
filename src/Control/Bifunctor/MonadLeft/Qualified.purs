@@ -3,7 +3,7 @@
 -- |
 -- | `ado notation` example
 -- | ```
--- | import Control.MonadLeft.Qualified as MonadLeft
+-- | import Control.Bifunctor.MonadLeft.Qualified as MonadLeft
 -- |
 -- | foo :: Either Int String -> Either String String
 -- | foo comp = MonadLeft.ado
@@ -13,7 +13,7 @@
 -- | ```
 -- | `do notation` example
 -- | ```
--- | import Control.MonadLeft.Qualified as MonadLeft
+-- | import Control.Bifunctor.MonadLeft.Qualified as MonadLeft
 -- |
 -- | foo :: Either Int String -> Either String String
 -- | foo comp = MonadLeft.do
@@ -21,10 +21,10 @@
 -- |   b <- comp
 -- |   lpure $ show $ a + b
 -- | ```
-module Control.MonadLeft.Qualified where
+module Control.Bifunctor.MonadLeft.Qualified where
 
-import Control.ApplyLeft (class ApplyLeft, lapply)
-import Control.BindLeft (class BindLeft, lbind, class DiscardLeft, ldiscard)
+import Control.Bifunctor.ApplyLeft (class ApplyLeft, lapply)
+import Control.Bifunctor.BindLeft (class BindLeft, lbind, class DiscardLeft, ldiscard)
 import Data.Bifunctor (class Bifunctor, lmap)
 
 discard :: forall m a b r. DiscardLeft a => BindLeft m => m a r -> (a -> m b r) -> m b r

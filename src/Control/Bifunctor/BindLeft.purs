@@ -1,4 +1,4 @@
-module Control.BindLeft where
+module Control.Bifunctor.BindLeft where
 
 import Data.Unit (Unit)
 import Control.Category (identity)
