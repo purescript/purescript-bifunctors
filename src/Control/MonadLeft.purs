@@ -1,7 +1,7 @@
-module Control.Bifunctor.MonadLeft where
+module Control.MonadLeft where
 
-import Control.Bifunctor.ApplicativeLeft (class ApplicativeLeft, whenLeft, unlessLeft)
-import Control.Bifunctor.BindLeft (class BindLeft, lbind)
+import Control.ApplicativeLeft (class ApplicativeLeft, whenLeft, unlessLeft)
+import Control.BindLeft (class BindLeft, lbind)
 import Data.Unit (Unit)
 
 class MonadLeft :: (Type -> Type -> Type) -> Constraint

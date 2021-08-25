@@ -1,4 +1,4 @@
-module Control.Bifunctor.ApplyLeft where
+module Control.ApplyLeft where
 
 import Prelude
 import Data.Bifunctor (class Bifunctor, lmap)
