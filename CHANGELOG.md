@@ -11,6 +11,7 @@ New features:
 Bugfixes:
 
 Other improvements:
+ - Corrected typo in documentation for `(<<$>>)` (#27)
 
 ## [v6.0.0](https://github.com/purescript/purescript-bifunctors/releases/tag/v6.0.0) - 2022-04-27
 
