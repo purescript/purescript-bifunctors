@@ -4,6 +4,8 @@ import Control.Category (identity)
 import Data.Const (Const(..))
 import Data.Either (Either(..))
 import Data.Tuple (Tuple(..))
+import Data.Unit (Unit, unit)
+import Data.Function (const)
 
 -- | A `Bifunctor` is a `Functor` from the pair category `(Type, Type)` to `Type`.
 -- |
@@ -28,6 +30,10 @@ lmap f = bimap f identity
 -- | Map a function over the second type arguments of a `Bifunctor`.
 rmap :: forall f a b c. Bifunctor f => (b -> c) -> f a b -> f a c
 rmap = bimap identity
+
+-- | The bivoid function is used to ignore the types wrapped by a Bifunctor.
+bivoid :: forall f a b. Bifunctor f => f a b -> f Unit Unit
+bivoid = bimap (const unit) (const unit)
 
 instance bifunctorEither :: Bifunctor Either where
   bimap f _ (Left l) = Left (f l)
