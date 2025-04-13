@@ -7,11 +7,15 @@ Notable changes to this project are documented in this file. The format is based
 Breaking changes:
 
 New features:
-  - Added `bivoid` 
 
 Bugfixes:
 
 Other improvements:
+
+## [v6.1.0](https://github.com/purescript/purescript-bifunctors/releases/tag/v6.1.0) - 2022-04-27
+
+New features:
+  - Added `bivoid` (#28 by @m-bock)
 
 ## [v6.0.0](https://github.com/purescript/purescript-bifunctors/releases/tag/v6.0.0) - 2022-04-27
 
