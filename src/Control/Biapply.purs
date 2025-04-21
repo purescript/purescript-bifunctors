@@ -9,7 +9,7 @@ import Data.Tuple (Tuple(..))
 -- | the style of `Applicative`:
 -- |
 -- | ```purescript
--- | bipure f g <<$>> x <<*>> y
+-- | bimap f g <<$>> x <<*>> y
 -- | ```
 infixl 4 identity as <<$>>
 
