@@ -3,9 +3,9 @@ module Data.Bifunctor where
 import Control.Category (identity)
 import Data.Const (Const(..))
 import Data.Either (Either(..))
+import Data.Function (const)
 import Data.Tuple (Tuple(..))
 import Data.Unit (Unit, unit)
-import Data.Function (const)
 
 -- | A `Bifunctor` is a `Functor` from the pair category `(Type, Type)` to `Type`.
 -- |
