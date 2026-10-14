@@ -12,6 +12,8 @@ Bugfixes:
 
 Other improvements:
 
+- Migrated from Bower/Pulp to Spago and updated CI and formatting tools.
+
 ## [v6.1.0](https://github.com/purescript/purescript-bifunctors/releases/tag/v6.1.0) - 2022-04-27
 
 New features:
@@ -115,6 +117,5 @@ Bump `const` dependency.
 - Added `Clown`, `Joker`, `Flip`, `Wrap`, `Join` and `Product` (@DylanLukes)
 
 ## [v0.0.1](https://github.com/purescript/purescript-bifunctors/releases/tag/v0.0.1) - 2014-05-21
-
 
 
