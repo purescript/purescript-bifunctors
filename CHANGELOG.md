@@ -12,7 +12,7 @@ Bugfixes:
 
 Other improvements:
 
-- Migrated from Bower/Pulp to Spago and updated CI and formatting tools.
+- Migrated from Bower/Pulp to Spago and updated CI and formatting tools (#29 by @thomashoneyman)
 
 ## [v6.1.0](https://github.com/purescript/purescript-bifunctors/releases/tag/v6.1.0) - 2022-04-27
 
