@@ -1,8 +1,7 @@
 module Control.Biapply where
 
-import Data.Function (const, identity)
-
 import Data.Bifunctor (class Bifunctor, bimap)
+import Data.Function (const, identity)
 import Data.Tuple (Tuple(..))
 
 -- | A convenience operator which can be used to apply the result of `bipure` in

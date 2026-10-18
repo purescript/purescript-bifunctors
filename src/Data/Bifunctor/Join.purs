@@ -4,7 +4,6 @@ import Prelude
 
 import Control.Biapplicative (class Biapplicative, bipure)
 import Control.Biapply (class Biapply, (<<*>>))
-
 import Data.Bifunctor (class Bifunctor, bimap)
 import Data.Newtype (class Newtype)
 
